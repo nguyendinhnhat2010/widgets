@@ -13,18 +13,19 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp>{
-  int number1 = 0, number2 = 0;
-
-  @override
-  // void initState() {
-  //   super.initState();
-  // }
-
-  void _ranDomNumber(){
+  luckyNumber(){
+    var randomnumber = "";
+    var number1 = Random();
+    var number2 = Random();
+    for (int i = 0; i < 6; i++) {
+      randomnumber = randomnumber + "  " + number1.nextInt(max(0, 6)).toString() + number2.nextInt(max(0, 6)).toString();
+    }
+    return randomnumber;
+  }
+  String randomNum = "Random 6 number";
+  ranDomNumber(){
     setState(() {
-      Random r = new Random();
-      number1 = r.nextInt(6);
-      number2 = r.nextInt(6);
+      randomNum = "Random 6 number : ${luckyNumber()}";
     });
   }
 
@@ -43,10 +44,10 @@ class _MyAppState extends State<MyApp>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(number1.toString()+number2.toString()),
+              Text(randomNum),
               FlatButton(
                 child: Text('Random'),
-                onPressed: _ranDomNumber,
+                onPressed: ranDomNumber,
                 color: Colors.blue,
                 textColor: Colors.white,
                 )
