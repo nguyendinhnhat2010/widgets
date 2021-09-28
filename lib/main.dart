@@ -17,9 +17,7 @@ class _MyAppState extends State<MyApp>{
     var randomnumber = "";
     var number1 = Random();
     var number2 = Random();
-    for (int i = 0; i < 6; i++) {
-      randomnumber = randomnumber + "  " + number1.nextInt(max(0, 6)).toString() + number2.nextInt(max(0, 6)).toString();
-    }
+      randomnumber = number1.nextInt(max(0, 6)).toString() + number2.nextInt(max(0, 6)).toString();
     return randomnumber;
   }
   String randomNum = "Random 6 number";
@@ -33,10 +31,13 @@ class _MyAppState extends State<MyApp>{
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.green[100],
         appBar: AppBar(
-          title: Center(
+          title: const Center(
             child: Text('Random Number',
-            style: TextStyle(fontSize: 18, color: Colors.grey,),
+            style: TextStyle(
+              fontSize: 18, 
+              color: Colors.grey,),
             ),
           ),
         ),
@@ -44,17 +45,38 @@ class _MyAppState extends State<MyApp>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(randomNum),
-              FlatButton(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (int i = 0; i < 5; i++)
+                Container(
+                  margin: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(5.0),
+                  decoration: myBoxDecoration(),
+                  child: Text(
+                    "${luckyNumber()}",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                ],
+              ),
+              ElevatedButton(
                 child: Text('Random'),
                 onPressed: ranDomNumber,
-                color: Colors.blue,
-                textColor: Colors.white,
-                )
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                ),
+              )
             ],
           ),
         ),
       ),
+    );
+  }
+  BoxDecoration myBoxDecoration(){
+    return BoxDecoration(
+      border: Border.all(color: Colors.red),
+      borderRadius: BorderRadius.circular(50),
     );
   }
 }
